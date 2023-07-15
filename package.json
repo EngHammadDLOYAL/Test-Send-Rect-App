@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "engines": {
     "node": "18.12.1"
-  },
+  }, 
   "private": true,
   "dependencies": {
     "@cosmjs/crypto": "^0.31.0",
