@@ -141,6 +141,10 @@ import kepllarLogo from "../keplr-logo.png";
            const offlineSigner = await window.getOfflineSigner(chainId);
            const accounts = await offlineSigner.getAccounts();
            console.log("offlineSigner", offlineSigner, accounts);
+
+           window.offlineSigner_1 = offlineSigner;
+           window.SigningStargateClient_1 = SigningStargateClient;
+
            if (
              offlineSigner &&
              SigningStargateClient &&
