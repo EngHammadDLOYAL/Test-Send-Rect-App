@@ -31,6 +31,62 @@ import kepllarLogo from "../keplr-logo.png";
 
     }, [search]);
 
+
+
+    const DENOM = "factory/kujira1qk00h5atutpsv900x202pxx42npjr9thg58dnqpa72f2p7m2luase444a7/uusk";
+    const CHAIN_INFO = {
+        chainId: "kaiyo-1",
+        chainName: "Kujira",
+        rpc: "https://rpc-kujira.mintthemoon.xyz",
+        rest: "https://lcd-kujira.mintthemoon.xyz",
+        bip44: {
+            coinType: 118,
+        },
+        bech32Config: {
+            bech32PrefixAccAddr: "kujira",
+            bech32PrefixAccPub: "kujira" + "pub",
+            bech32PrefixValAddr: "kujira" + "valoper",
+            bech32PrefixValPub: "kujira" + "valoperpub",
+            bech32PrefixConsAddr: "kujira" + "valcons",
+            bech32PrefixConsPub: "kujira" + "valconspub",
+        },
+        currencies: [
+            {
+                coinDenom: "KUJI",
+                coinMinimalDenom: "ukuji",
+                coinDecimals: 6,
+                coinGeckoId: "kujira",
+            },
+            {
+                coinDenom: "USK",
+                coinMinimalDenom: DENOM,
+                coinDecimals: 6,
+                coinGeckoId: "usk",
+            },
+        ],
+        feeCurrencies: [
+            {
+                coinDenom: "USK",
+                coinMinimalDenom: DENOM,
+                coinDecimals: 6,
+                coinGeckoId: "usk",
+            },
+        ],
+        stakeCurrency: {
+            coinDenom: "KUJI",
+            coinMinimalDenom: "ukuji",
+            coinDecimals: 6,
+            coinGeckoId: "kujira",
+        },
+        coinType: 118,
+        gasPriceStep: {
+            low: 0.0015,
+            average: 0.002,
+            high: 0.003,
+        },
+    };
+
+
     const connectWallet = async () => {
       if (!window.getOfflineSigner || !window.keplr) {
         alert("Please install keplr extension");
@@ -38,39 +94,7 @@ import kepllarLogo from "../keplr-logo.png";
       } else {
         if (window.keplr.experimentalSuggestChain) {
           try {
-            await window.keplr.experimentalSuggestChain({
-              chainId: "kaiyo-1",
-              chainName: "Kujira",
-              rpc: "https://rpc.kaiyo.kujira.setten.io/",
-              rest: "https://lcd.kaiyo.kujira.setten.io/",
-              stakeCurrency: {
-                coinDenom: "KUJI",
-                coinMinimalDenom: "ukuji",
-                coinDecimals: 6,
-              },
-              bip44: {
-                coinType: 118,
-              },
-              currencies: [
-                {
-                  coinDenom: "KUJI",
-                  coinMinimalDenom: "ukuji",
-                  coinDecimals: 6,
-                },
-              ],
-              feeCurrencies: [
-                {
-                  coinDenom: "KUJI",
-                  coinMinimalDenom: "ukuji",
-                  coinDecimals: 6,
-                },
-              ],
-              gasPriceStep: {
-                low: 0.001,
-                average: 0.025,
-                high: 0.04,
-              },
-            });
+            await window.keplr.experimentalSuggestChain(CHAIN_INFO);
           } catch {
             alert("Failed to suggest the chain");
           }
