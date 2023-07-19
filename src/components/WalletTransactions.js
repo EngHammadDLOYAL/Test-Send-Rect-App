@@ -134,33 +134,32 @@ import kepllarLogo from "../keplr-logo.png";
         currentAmount *= 10000;
         currentAmount = Math.floor(currentAmount);
 
-        // TODO: need to uncomment this code 
-        
-        // if (window && window.keplr) {
-        //   const chainId = "kaiyo-1";
-        //   await window.keplr.enable(chainId);
-        //   const offlineSigner = await window.getOfflineSigner(chainId);
-        //   const accounts = await offlineSigner.getAccounts();
-        //   console.log("offlineSigner", offlineSigner, accounts);
-        //   if (
-        //     offlineSigner &&
-        //     SigningStargateClient &&
-        //     SigningStargateClient.connectWithSigner
-        //   ) {
-        //     // const client = await SigningStargateClient.connectWithSigner(
-        //     //   "https://rpc.kaiyo.kujira.setten.io/",
-        //     //   offlineSigner,
-        //     //   {
-        //     //     broadcastPollIntervalMs: 300,
-        //     //     broadcastTimeoutMs: 8.000,
-        //     //     gasPrice: 0.001,
-        //     //   }
-        //     // );
+       
+         if (window && window.keplr) {
+           const chainId = "kaiyo-1";
+           await window.keplr.enable(chainId);
+           const offlineSigner = await window.getOfflineSigner(chainId);
+           const accounts = await offlineSigner.getAccounts();
+           console.log("offlineSigner", offlineSigner, accounts);
+           if (
+             offlineSigner &&
+             SigningStargateClient &&
+             SigningStargateClient.connectWithSigner
+           ) {
+             const client = await SigningStargateClient.connectWithSigner(
+               "https://rpc.kaiyo.kujira.setten.io/",
+               offlineSigner,
+               {
+                 broadcastPollIntervalMs: 300,
+                 broadcastTimeoutMs: 8.000,
+                 gasPrice: 0.001,
+               }
+             );
 
-        //   } else {
-        //     alert("Can't get signer.");
-        //   }
-        // }
+        } else {
+            alert("Can't get signer.");
+          }
+        }
         setTransactionHas("222");
 
         const collectionData= `amount=${amount}&transactionHash=${123}&gas=${gas}&cid=${cid}&pid=${aid}&walletAddress=${walletAddress}`
